@@ -14,6 +14,9 @@ namespace DnDHooksFullStack.Models
         private static bool LOG_SQL_STATEMENTS_IN_DEVELOPMENT = false;
 
         // Add database tables here
+        public DbSet<XPTrackerModel> XPTracker { get; set; }
+        public DbSet<SessionTrackerModel> SessionTracker { get; set; }
+        public DbSet<LevelTrackerModel> LevelTracker { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
