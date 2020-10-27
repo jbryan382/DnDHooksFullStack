@@ -6,7 +6,7 @@ import { NavBar } from '../components/NavBar'
 export function Monster() {
   const params = useParams()
   const id = params.monster
-  const [Monster, setMonster] = useState([])
+  const [monster, setMonster] = useState([])
   const [monsterActions, setMonsterActions] = useState([])
   const [monsterLegendaryActions, setMonsterLegendaryActions] = useState([])
 
@@ -24,27 +24,23 @@ export function Monster() {
   return (
     <>
       <NavBar />
-      <h1>{Monster.name}</h1>
+      <h1>{monster.name}</h1>
       <ul>
-        <li>Hit Points: {Monster.hit_points}</li>
-        <li>Hit Dice: {Monster.hit_dice}</li>
-        <li>CR: {Monster.challenge_rating}</li>
-        <li>AC: {Monster.armor_class}</li>
-        <li>Alignment: {Monster.alignment}</li>
+        <li>Hit Points: {monster.hit_points}</li>
+        <li>Hit Dice: {monster.hit_dice}</li>
+        <li>CR: {monster.challenge_rating}</li>
+        <li>AC: {monster.armor_class}</li>
+        <li>Alignment: {monster.alignment}</li>
         <li>
           Actions and Legendary Actions: Actions:
-          {monsterActions.length > 0 ? (
-            monsterActions.map((action, key) => {
+          {monster ? (
+            monster.actions.map((action, key) => {
               return (
                 <ul key={key}>
                   <li>{action.name}</li>
-                  {/* {action.map((desc) => {
-                    return (
-                      <ul>
-                        <li>{desc.desc}</li>
-                      </ul>
-                    )
-                  })} */}
+                  <ul>
+                    <li>{action.desc}</li>
+                  </ul>
                 </ul>
               )
             })
@@ -57,13 +53,9 @@ export function Monster() {
               return (
                 <ul key={key}>
                   <li>{action.name}</li>
-                  {/* {action.map((desc) => {
-                    return (
-                      <ul>
-                        <li>{desc.desc}</li>
-                      </ul>
-                    )
-                  })} */}
+                  <ul>
+                    <li>{action.desc}</li>
+                  </ul>
                 </ul>
               )
             })
