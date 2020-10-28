@@ -5,10 +5,10 @@ import axios from 'axios'
 
 export function Spell() {
   const params = useParams()
-  const id = params.spell
   const [spell, setSpell] = useState([])
 
   useEffect(() => {
+    const id = params.spell
     axios.get(`http://www.dnd5eapi.co/api/spells/${id}`).then((response) => {
       setSpell(response.data)
       console.log(response.data)
@@ -30,9 +30,9 @@ export function Spell() {
           <li>Classes:</li>
         )}
         {spell.classes ? (
-          spell.classes.map((s) => {
+          spell.classes.map((s, key) => {
             return (
-              <ul>
+              <ul key={key}>
                 <li>{s.name}</li>
               </ul>
             )
@@ -43,13 +43,11 @@ export function Spell() {
           </ul>
         )}
         <li>{spell.duration}</li>
-        <li>
-          {spell.concentration === true ? (
-            <li>Requires Concentration</li>
-          ) : (
-            <li>No Concentration</li>
-          )}
-        </li>
+        {spell.concentration === true ? (
+          <li>Requires Concentration</li>
+        ) : (
+          <li>No Concentration</li>
+        )}
         <li>{spell.desc}</li>
       </ul>
     </>

@@ -5,7 +5,7 @@ export function NavBar() {
   return (
     <>
       <header>
-        <h1>Welcome to my D&D Nerdy Domain</h1>
+        <h1>DM D&D Companion</h1>
         <nav>
           <ul>
             <li>

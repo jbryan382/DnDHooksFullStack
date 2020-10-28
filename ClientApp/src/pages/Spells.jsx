@@ -37,9 +37,9 @@ export function Spells() {
       <h2>Total Spells: {Spells.count}</h2>
       <ul>
         {Spells.length > 0 ? (
-          Spells.map((spell, keys) => {
+          Spells.map((spell, key) => {
             return (
-              <Link to={`/slist/${spell.index}`} key={keys} id={spell.index}>
+              <Link to={`/slist/${spell.index}`} key={key} id={spell.index}>
                 <li>{spell.name}</li>
               </Link>
             )
