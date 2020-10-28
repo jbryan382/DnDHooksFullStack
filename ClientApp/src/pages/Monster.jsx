@@ -7,17 +7,11 @@ export function Monster() {
   const params = useParams()
   const id = params.monster
   const [monster, setMonster] = useState([])
-  const [monsterActions, setMonsterActions] = useState([])
-  const [monsterLegendaryActions, setMonsterLegendaryActions] = useState([])
 
   useEffect(() => {
     axios.get(`http://www.dnd5eapi.co/api/monsters/${id}`).then((response) => {
       setMonster(response.data)
-      setMonsterActions(response.data.actions)
-      setMonsterLegendaryActions(response.data.legendary_actions)
-      console.log(params.monster)
       console.log(response.data)
-      console.log(response.data.actions)
     })
   }, [])
 
@@ -31,10 +25,11 @@ export function Monster() {
         <li>CR: {monster.challenge_rating}</li>
         <li>AC: {monster.armor_class}</li>
         <li>Alignment: {monster.alignment}</li>
-        <li>
-          Actions and Legendary Actions: Actions:
-          {monster ? (
-            monster.actions.map((action, key) => {
+        <li>Size: {monster.size}</li>
+        {monster.actions ? (
+          <>
+            <li>Actions:</li>
+            {monster.actions.map((action, key) => {
               return (
                 <ul key={key}>
                   <li>{action.name}</li>
@@ -43,13 +38,15 @@ export function Monster() {
                   </ul>
                 </ul>
               )
-            })
-          ) : (
-            <li>Loading...</li>
-          )}
-          Legendary Actions:
-          {monsterLegendaryActions.length > 0 ? (
-            monsterLegendaryActions.map((action, key) => {
+            })}
+          </>
+        ) : (
+          <li>Loading...</li>
+        )}
+        {monster.legendary_actions ? (
+          <>
+            <li>Legendary Actions:</li>
+            {monster.legendary_actions.map((action, key) => {
               return (
                 <ul key={key}>
                   <li>{action.name}</li>
@@ -58,11 +55,11 @@ export function Monster() {
                   </ul>
                 </ul>
               )
-            })
-          ) : (
-            <li>Loading...</li>
-          )}
-        </li>
+            })}
+          </>
+        ) : (
+          <></>
+        )}
       </ul>
     </>
   )

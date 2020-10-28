@@ -6,14 +6,12 @@ import axios from 'axios'
 export function Spell() {
   const params = useParams()
   const id = params.spell
-  const [Spell, setSpell] = useState([])
-  const [Classes, setClasses] = useState([])
+  const [spell, setSpell] = useState([])
 
   useEffect(() => {
     axios.get(`http://www.dnd5eapi.co/api/spells/${id}`).then((response) => {
       setSpell(response.data)
-      setClasses(response.data.classes)
-      console.log(response.data.classes)
+      console.log(response.data)
     })
   }, [])
 
@@ -21,34 +19,38 @@ export function Spell() {
     <>
       <NavBar />
       <ul>
-        <li>{Spell.name}</li>
-        {Spell.level === 0 ? <li> Cantrip</li> : <li>Level: {Spell.level}</li>}
-        <li>Casting Time: {Spell.casting_time}</li>
-        <li>Materials: {Spell.material}</li>
-        <li>Components: {Spell.components}</li>
-        <li>Class(es):</li>
-        {Classes.length === 1 ? (
-          <ul>
-            <li>{Classes[0].name}</li>
-          </ul>
+        <li>{spell.name}</li>
+        {spell.level === 0 ? <li> Cantrip</li> : <li>Level: {spell.level}</li>}
+        <li>Casting Time: {spell.casting_time}</li>
+        <li>Materials: {spell.material}</li>
+        <li>Components: {spell.components}</li>
+        {spell.classes && spell.classes.length === 1 ? (
+          <li>Class:</li>
         ) : (
-          Classes.map((spell) => {
+          <li>Classes:</li>
+        )}
+        {spell.classes ? (
+          spell.classes.map((s) => {
             return (
               <ul>
-                <li>{spell.name}</li>
+                <li>{s.name}</li>
               </ul>
             )
           })
+        ) : (
+          <ul>
+            <li>Loading...</li>
+          </ul>
         )}
-        <li>{Spell.duration}</li>
+        <li>{spell.duration}</li>
         <li>
-          {Spell.concentration === true ? (
+          {spell.concentration === true ? (
             <li>Requires Concentration</li>
           ) : (
             <li>No Concentration</li>
           )}
         </li>
-        <li>{Spell.desc}</li>
+        <li>{spell.desc}</li>
       </ul>
     </>
   )
