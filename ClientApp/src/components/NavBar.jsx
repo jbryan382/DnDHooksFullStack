@@ -6,10 +6,10 @@ export function NavBar() {
     <>
       <header>
         <h1>DM D&D Companion</h1>
-        <nav>
+        <nav className="navbar">
           <ul>
             <li>
-              <Link to="/">Go Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/mlist">Monster List</Link>

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 import axios from 'axios'
 
 export function Spell() {
   const params = useParams()
+  const id = params.spell
   const [spell, setSpell] = useState([])
 
   useEffect(() => {
-    const id = params.spell
     axios.get(`http://www.dnd5eapi.co/api/spells/${id}`).then((response) => {
       setSpell(response.data)
       console.log(response.data)
@@ -22,7 +23,7 @@ export function Spell() {
         <li>{spell.name}</li>
         {spell.level === 0 ? <li> Cantrip</li> : <li>Level: {spell.level}</li>}
         <li>Casting Time: {spell.casting_time}</li>
-        <li>Materials: {spell.material}</li>
+        {spell.material ? <li>Materials: {spell.material}</li> : <></>}
         <li>Components: {spell.components}</li>
         {spell.classes && spell.classes.length === 1 ? (
           <li>Class:</li>
@@ -50,6 +51,7 @@ export function Spell() {
         )}
         <li>{spell.desc}</li>
       </ul>
+      <Footer />
     </>
   )
 }

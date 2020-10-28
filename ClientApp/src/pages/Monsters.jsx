@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export function Monsters() {
-  const [Monsters, setMonsters] = useState([])
+  const [monsters, setMonsters] = useState([])
 
   useEffect(() => {
     axios.get('http://www.dnd5eapi.co/api/monsters').then((response) => {
@@ -16,10 +17,14 @@ export function Monsters() {
     <>
       <NavBar />
       <h1>Monsters</h1>
-      <h2>Total Monsters: {Monsters.count}</h2>
+      {monsters.length ? (
+        <h3>Total Monsters: {monsters.length}</h3>
+      ) : (
+        <h3> Loading... </h3>
+      )}
       <ul>
-        {Monsters.length > 0 ? (
-          Monsters.map((monster, key) => {
+        {monsters ? (
+          monsters.map((monster, key) => {
             return (
               <Link to={`/mlist/${monster.index}`} key={key}>
                 <li>{monster.name}</li>
@@ -27,9 +32,10 @@ export function Monsters() {
             )
           })
         ) : (
-          <h2> Loading... </h2>
+          <></>
         )}
       </ul>
+      <Footer />
     </>
   )
 }

@@ -15,3 +15,26 @@ th,
 td {
   border: solid black 1px;
 }
+
+ul,
+li {
+  list-style: none;
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.navbar li {
+  padding: 1rem;
+}
+.welcomeMessage {
+  margin: 4rem;
+}
+.footerText {
+  border-top: black 1px solid;
+  border-bottom: black 1px solid;
+  padding: 2rem;
+}

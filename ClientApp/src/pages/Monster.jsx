@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Footer } from '../components/Footer'
 import { NavBar } from '../components/NavBar'
 
 export function Monster() {
@@ -26,10 +27,11 @@ export function Monster() {
         {monster.size} {monster.type}, {monster.alignment}
       </h4>
       <ul>
-        <li>AC: {monster.armor_class}</li>
+        <li>Armor Class: {monster.armor_class}</li>
         <li>
           Hit Points: {monster.hit_points}({monster.hit_dice})
         </li>
+        {/* Conditional to ensure speed(s) are loaded and can be displayed if available */}
         {monster.speed ? (
           <>
             <li>Speed: {monster.speed.walk}</li>
@@ -45,11 +47,69 @@ export function Monster() {
               ) : (
                 <></>
               )}
+              {monster.speed.climb ? (
+                <li>Climbing: {monster.speed.climb}</li>
+              ) : (
+                <></>
+              )}
             </ul>
           </>
         ) : (
           <li>Loading...</li>
         )}
+        <li>Stats:</li>
+        <table>
+          <thead>
+            <tr>
+              <th>STR</th>
+              <th>DEX</th>
+              <th>CON</th>
+              <th>INT</th>
+              <th>WIS</th>
+              <th>CHA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {monster.strength} ({handleModifier(monster.strength)})
+              </td>
+              <td>
+                {monster.dexterity} ({handleModifier(monster.dexterity)})
+              </td>
+              <td>
+                {monster.constitution} ({handleModifier(monster.constitution)})
+              </td>
+              <td>
+                {monster.intelligence} ({handleModifier(monster.intelligence)})
+              </td>
+              <td>
+                {monster.wisdom} ({handleModifier(monster.wisdom)})
+              </td>
+              <td>
+                {monster.charisma} ({handleModifier(monster.charisma)})
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        {/* Conditional to ensure proficiencies are loaded and can be displayed if available */}
+        {monster.proficiencies && monster.proficiencies !== 0 ? (
+          <>
+            <li>Proficiencies:</li>
+            {monster.proficiencies.map((prof, key) => {
+              return (
+                <ul key={key}>
+                  <li>
+                    {prof.proficiency.name} + {prof.value}
+                  </li>
+                </ul>
+              )
+            })}
+          </>
+        ) : (
+          <></>
+        )}
+        {/* Conditional to ensure senses are loaded and can be displayed if available */}
         {monster.senses ? (
           <>
             <li>Senses:</li>
@@ -72,6 +132,7 @@ export function Monster() {
         ) : (
           <li>Loading...</li>
         )}
+        {/* Conditional to ensure languages are loaded and can be displayed if available */}
         {monster.languages ? (
           <li>Languages: {monster.languages}</li>
         ) : (
@@ -80,41 +141,6 @@ export function Monster() {
         <li>
           CR: {monster.challenge_rating} ({monster.xp} XP)
         </li>
-        <li>Stats:</li>
-        <table>
-          <thead>
-            <tr>
-              <th>STR</th>
-              <th>DEX</th>
-              <th>CON</th>
-              <th>INT</th>
-              <th>WIS</th>
-              <th>CHA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                {monster.strength}({handleModifier(monster.strength)})
-              </td>
-              <td>
-                {monster.dexterity}({handleModifier(monster.dexterity)})
-              </td>
-              <td>
-                {monster.constitution}({handleModifier(monster.constitution)})
-              </td>
-              <td>
-                {monster.intelligence}({handleModifier(monster.intelligence)})
-              </td>
-              <td>
-                {monster.wisdom}({handleModifier(monster.wisdom)})
-              </td>
-              <td>
-                {monster.charisma}({handleModifier(monster.charisma)})
-              </td>
-            </tr>
-          </tbody>
-        </table>
         {monster.damage_resistances &&
         monster.damage_resistances.length !== 0 ? (
           <>
@@ -163,9 +189,9 @@ export function Monster() {
         monster.damage_vulnerabilities.length !== 0 ? (
           <>
             <li>Damage Vulnerabilities:</li>
-            {monster.damage_vulnerabilities.map((resistance) => {
+            {monster.damage_vulnerabilities.map((resistance, key) => {
               return (
-                <ul>
+                <ul key={key}>
                   <li>{resistance}</li>
                 </ul>
               )
@@ -226,6 +252,7 @@ export function Monster() {
           <></>
         )}
       </ul>
+      <Footer />
     </>
   )
 }

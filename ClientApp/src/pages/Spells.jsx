@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { NavBar } from '../components/NavBar'
 import axios from 'axios'
+import { Footer } from '../components/Footer'
 
 export function Spells() {
-  const [Spells, setSpells] = useState([])
-  // const [SearchTerm, setSearchTerm] = useState('')
+  const [spells, setSpells] = useState([])
+  // const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     axios.get('http://www.dnd5eapi.co/api/spells/').then((response) => {
@@ -15,10 +16,10 @@ export function Spells() {
     })
   }, [])
 
-  // function searchSpells() {
+  // async function searchSpells() {
   //   //  event.preventDefault()
   //   axios
-  //     .get(`http://www.dnd5eapi.co/api/spells/${SearchTerm}`)
+  //     .get(`http://www.dnd5eapi.co/api/spells/${searchTerm}`)
   //     .then((response) => {
   //       setSpells(response.data.results)
   //       console.log('Search')
@@ -30,14 +31,22 @@ export function Spells() {
     <>
       <NavBar />
       {/* <form onSubmit={searchSpells()}>
-             <input type="text" placeholder="Search Spell" onChange={event => setSearchTerm(event.target.value)}/>
-             <button type="submit">Search</button>
-         </form> */}
+        <input
+          type="text"
+          placeholder="Search Spell"
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form> */}
       <h1>Every Spell in D&D:</h1>
-      <h2>Total Spells: {Spells.count}</h2>
+      {spells.length ? (
+        <h3>Total Spells: {spells.length}</h3>
+      ) : (
+        <h3>Loading...</h3>
+      )}
       <ul>
-        {Spells.length > 0 ? (
-          Spells.map((spell, key) => {
+        {spells ? (
+          spells.map((spell, key) => {
             return (
               <Link to={`/slist/${spell.index}`} key={key} id={spell.index}>
                 <li>{spell.name}</li>
@@ -45,9 +54,10 @@ export function Spells() {
             )
           })
         ) : (
-          <h2>Loading...</h2>
+          <></>
         )}
       </ul>
+      <Footer />
     </>
   )
 }
