@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { NavBar } from '../components/NavBar'
 import axios from 'axios'
-import { Spell } from './Spell'
 
 export function Spells() {
   const [Spells, setSpells] = useState([])
-  const [SearchTerm, setSearchTerm] = useState('')
+  // const [SearchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     axios.get('http://www.dnd5eapi.co/api/spells/').then((response) => {

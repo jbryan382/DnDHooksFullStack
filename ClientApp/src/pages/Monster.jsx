@@ -26,6 +26,73 @@ export function Monster() {
         <li>AC: {monster.armor_class}</li>
         <li>Alignment: {monster.alignment}</li>
         <li>Size: {monster.size}</li>
+        <li>Stats:</li>
+        <table>
+          <thead>
+            <tr>
+              <th>STR</th>
+              <th>DEX</th>
+              <th>CON</th>
+              <th>INT</th>
+              <th>WIS</th>
+              <th>CHA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{monster.strength}</td>
+              <td>{monster.dexterity}</td>
+              <td>{monster.constitution}</td>
+              <td>{monster.intelligence}</td>
+              <td>{monster.wisdom}</td>
+              <td>{monster.charisma}</td>
+            </tr>
+          </tbody>
+        </table>
+        {monster.damage_immunities && monster.damage_immunities.length !== 0 ? (
+          <>
+            <li>Damage Immunities:</li>
+            {monster.damage_immunities.map((immunity) => {
+              return (
+                <ul>
+                  <li>{immunity}</li>
+                </ul>
+              )
+            })}
+          </>
+        ) : (
+          <li>Damage Immunities: None</li>
+        )}
+        {monster.damage_resistances &&
+        monster.damage_resistances.length !== 0 ? (
+          <>
+            <li>Damage Resistances:</li>
+            {monster.damage_resistances.map((resistance) => {
+              return (
+                <ul>
+                  <li>{resistance}</li>
+                </ul>
+              )
+            })}
+          </>
+        ) : (
+          <li>Damage Resistances: None</li>
+        )}
+        {monster.damage_vulnerabilities &&
+        monster.damage_vulnerabilities.length !== 0 ? (
+          <>
+            <li>Damage Vulnerabilities:</li>
+            {monster.damage_vulnerabilities.map((resistance) => {
+              return (
+                <ul>
+                  <li>{resistance}</li>
+                </ul>
+              )
+            })}
+          </>
+        ) : (
+          <li>Damage Vulnerabilities: None</li>
+        )}
         {monster.actions ? (
           <>
             <li>Actions:</li>
