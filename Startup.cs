@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using DnDHooksFullStack.Models;
+using DnDHooksFullStack.Utils;
+using Microsoft.Extensions.Configuration;
 
 namespace DnDHooksFullStack
 {
@@ -19,8 +20,12 @@ namespace DnDHooksFullStack
     {
         public Startup(IConfiguration configuration)
         {
+            
             Configuration = configuration;
             JWT_KEY = Configuration["JWT_KEY"];
+            Console.WriteLine(JWT_KEY);
+            Console.WriteLine("^^^^^^^^^^^^^");
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -30,6 +35,8 @@ namespace DnDHooksFullStack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IConfiguration>(provider => Configuration);
+            services.AddSingleton<Utilities>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -61,6 +68,8 @@ namespace DnDHooksFullStack
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
+
             if (JWT_KEY == null || JWT_KEY.Length < 20)
             {
                 app.Run(async (context) =>

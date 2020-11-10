@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DnDHooksFullStack.Models
 {
-    public class SessionTrackerModel
+    public class SessionTracker
     {
         public int Id { get; set; }
         // public Guid SessionNumber { get; set; } = new Guid();
@@ -14,6 +14,6 @@ namespace DnDHooksFullStack.Models
         public int ExplorationXP { get; set; }
         public int CombatXP { get; set; }
         public int XPId { get; set; }
-        public XPTrackerModel XPTrackerModel { get; set; }
+        public XPTracker XPTracker { get; set; }
     }
 }

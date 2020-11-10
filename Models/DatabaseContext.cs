@@ -14,9 +14,11 @@ namespace DnDHooksFullStack.Models
         private static bool LOG_SQL_STATEMENTS_IN_DEVELOPMENT = false;
 
         // Add database tables here
-        public DbSet<XPTrackerModel> XPTracker { get; set; }
-        public DbSet<SessionTrackerModel> SessionTracker { get; set; }
-        public DbSet<LevelTrackerModel> LevelTracker { get; set; }
+        public DbSet<XPTracker> XPTracker { get; set; }
+        public DbSet<SessionTracker> SessionTracker { get; set; }
+        public DbSet<LevelTracker> LevelTracker { get; set; }
+        public DbSet<User> Users { get; set; }
+        
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,6 +38,10 @@ namespace DnDHooksFullStack.Models
 
                 optionsBuilder.UseNpgsql(conn);
             }
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(user => user.Email) .IsUnique();
         }
 
         private string ConvertPostConnectionToConnectionString(string connection)

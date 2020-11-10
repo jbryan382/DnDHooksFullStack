@@ -23,18 +23,30 @@ li {
 
 .navbar ul {
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
 }
 
 .navbar li {
   padding: 1rem;
 }
+
 .welcomeMessage {
   margin: 4rem;
 }
+
+.signUpBox,
+.loginBox {
+  border: solid black 1px;
+  margin: 5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 .footerText {
-  border-top: black 1px solid;
-  border-bottom: black 1px solid;
+  border-top: solid black 1px;
+  border-bottom: solid black 1px;
   padding: 2rem;
 }

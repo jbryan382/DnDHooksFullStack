@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace DnDHooksFullStack.Models
 {
-    public class XPTrackerModel
+    public class XPTracker
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
@@ -12,6 +12,6 @@ namespace DnDHooksFullStack.Models
         public int TotalXP { get; set; }
         [JsonPropertyName("totalLevel")]
         public int TotalLevel { get; set; }
-        public List<SessionTrackerModel> Sessions { get; set; } = new List<SessionTrackerModel>();
+        public List<SessionTracker> Sessions { get; set; } = new List<SessionTracker>();
     }
 }
