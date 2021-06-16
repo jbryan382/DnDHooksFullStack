@@ -6,15 +6,22 @@ import { Footer } from '../components/Footer'
 
 export function Spells() {
   const [spells, setSpells] = useState([])
+  const [spellLevel, setSpellLevel] = useState('')
   // const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    axios.get('http://www.dnd5eapi.co/api/spells/').then((response) => {
-      setSpells(response.data.results)
-      console.log('Initial Get')
-      console.log(response.data.results)
-    })
-  }, [])
+    handleSpellsGet()
+  }, [spellLevel])
+
+  async function handleSpellsGet() {
+    const specificSpellLevel = spellLevel ? `?level=${spellLevel}` : ''
+    await axios
+      .get(`http://www.dnd5eapi.co/api/spells${specificSpellLevel}`)
+      .then((response) => {
+        setSpells(response.data.results)
+        console.log(response.data.results)
+      })
+  }
 
   // async function searchSpells() {
   //   //  event.preventDefault()
@@ -22,8 +29,6 @@ export function Spells() {
   //     .get(`http://www.dnd5eapi.co/api/spells/${searchTerm}`)
   //     .then((response) => {
   //       setSpells(response.data.results)
-  //       console.log('Search')
-  //       console.log(response.data.results)
   //     })
   // }
 
@@ -38,6 +43,18 @@ export function Spells() {
         />
         <button type="submit">Search</button>
       </form> */}
+      <select onChange={(event) => setSpellLevel(event.target.value)}>
+        <option value="">Any</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="1">8</option>
+        <option value="1">9</option>
+      </select>
       <h1>Every Spell in D&D:</h1>
       {spells.length ? (
         <h3>Total Spells: {spells.length}</h3>
