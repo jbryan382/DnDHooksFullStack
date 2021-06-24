@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Footer } from '../components/Footer'
-import { NavBar } from '../components/NavBar'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export function Monsters() {
-  const [monsters, setMonsters] = useState([])
+  const [monsters, setMonsters] = useState([{
+    index: '',
+    name: '',
+    url: ''
+  }])
   const [cR, setCR] = useState('')
 
   useEffect(() => {
@@ -23,7 +25,6 @@ export function Monsters() {
   }
   return (
     <>
-      <NavBar />
       <h1>Monsters</h1>
       <select onChange={(event) => setCR(event.target.value)}>
         <option value="">Any</option>
@@ -56,8 +57,8 @@ export function Monsters() {
       {monsters.length ? (
         <h3>Total Monsters: {monsters.length}</h3>
       ) : (
-        <h3> Loading... </h3>
-      )}
+          <h3> Loading... </h3>
+        )}
       <ul>
         {monsters ? (
           monsters.map((monster, key) => {
@@ -68,10 +69,9 @@ export function Monsters() {
             )
           })
         ) : (
-          <></>
-        )}
+            <></>
+          )}
       </ul>
-      <Footer />
     </>
   )
 }

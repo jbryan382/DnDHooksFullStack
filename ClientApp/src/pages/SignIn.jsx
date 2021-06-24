@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { recordAuthentication } from '../auth'
-import { NavBar } from '../components/NavBar'
 
 export function SignIn() {
   const [errorMessage, setErrorMessage] = useState()
@@ -40,7 +39,6 @@ export function SignIn() {
 
   return (
     <>
-      <NavBar />
       {errorMessage && <p>{errorMessage}</p>}
       <h1>Login</h1>
       <div className="loginBox">

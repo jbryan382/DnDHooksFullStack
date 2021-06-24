@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NavBar } from '../components/NavBar'
 import axios from 'axios'
-import { Footer } from '../components/Footer'
+
 
 export function Spells() {
   const [spells, setSpells] = useState([])
@@ -34,7 +33,6 @@ export function Spells() {
 
   return (
     <>
-      <NavBar />
       {/* <form onSubmit={searchSpells()}>
         <input
           type="text"
@@ -59,8 +57,8 @@ export function Spells() {
       {spells.length ? (
         <h3>Total Spells: {spells.length}</h3>
       ) : (
-        <h3>Loading...</h3>
-      )}
+          <h3>Loading...</h3>
+        )}
       <ul>
         {spells ? (
           spells.map((spell, key) => {
@@ -71,10 +69,9 @@ export function Spells() {
             )
           })
         ) : (
-          <></>
-        )}
+            <></>
+          )}
       </ul>
-      <Footer />
     </>
   )
 }

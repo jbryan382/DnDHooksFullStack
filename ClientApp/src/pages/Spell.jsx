@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Footer } from '../components/Footer'
-import { NavBar } from '../components/NavBar'
 import axios from 'axios'
 
 export function Spell() {
@@ -18,18 +16,17 @@ export function Spell() {
 
   return (
     <>
-      <NavBar />
+      <h3>{spell.name}</h3>
       <ul>
-        <li>{spell.name}</li>
-        {spell.level === 0 ? <li> Cantrip</li> : <li>Level: {spell.level}</li>}
+        {spell.level === 0 ? <li>Cantrip</li> : <li>Level: {spell.level}</li>}
         <li>Casting Time: {spell.casting_time}</li>
         {spell.material ? <li>Materials: {spell.material}</li> : <></>}
         <li>Components: {spell.components}</li>
         {spell.classes && spell.classes.length === 1 ? (
           <li>Class:</li>
         ) : (
-          <li>Classes:</li>
-        )}
+            <li>Classes:</li>
+          )}
         {spell.classes ? (
           spell.classes.map((s, key) => {
             return (
@@ -39,19 +36,18 @@ export function Spell() {
             )
           })
         ) : (
-          <ul>
-            <li>Loading...</li>
-          </ul>
-        )}
+            <ul>
+              <li>Loading...</li>
+            </ul>
+          )}
         <li>{spell.duration}</li>
         {spell.concentration === true ? (
           <li>Requires Concentration</li>
         ) : (
-          <li>No Concentration</li>
-        )}
+            <li>No Concentration</li>
+          )}
         <li>{spell.desc}</li>
       </ul>
-      <Footer />
     </>
   )
 }

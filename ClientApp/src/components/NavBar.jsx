@@ -27,35 +27,38 @@ export function NavBar() {
             <li>
               <Link to="/slist">Spell List</Link>
             </li>
+            <li>
+              <Link to="/clist">Class List</Link>
+            </li>
           </ul>
           <ul>
             {isLoggedIn() ? (
               <></>
             ) : (
-              <>
-                <li>
-                  <Link to="/signup">Sign Up</Link>
-                </li>
-              </>
-            )}
+                <>
+                  <li>
+                    <Link to="/signup">Sign Up</Link>
+                  </li>
+                </>
+              )}
             {isLoggedIn() ? (
               <></>
             ) : (
-              <>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </>
-            )}
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                </>
+              )}
             {isLoggedIn() ? (
               <>
                 <li>
-                  <Link onClick={handleLogout()}>Log out</Link>
+                  <Link to='/' onClick={handleLogout}>Log out</Link>
                 </li>
               </>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
           </ul>
         </nav>
       </header>

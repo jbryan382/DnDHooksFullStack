@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { NavBar } from '../components/NavBar'
 
 export function SignUp() {
   const [errorMessage, setErrorMessage] = useState()
@@ -39,7 +38,6 @@ export function SignUp() {
 
   return (
     <>
-      <NavBar />
       <h1>Sign Up</h1>
       <div className="signUpBox">
         <form onSubmit={(event) => handleFormSubmit(event)}>

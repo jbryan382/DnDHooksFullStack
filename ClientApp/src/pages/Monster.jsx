@@ -1,13 +1,11 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Footer } from '../components/Footer'
-import { NavBar } from '../components/NavBar'
 
 export function Monster() {
   const params = useParams()
   const id = params.monster
-  const [monster, setMonster] = useState([])
+  const [monster, setMonster] = useState({})
 
   useEffect(() => {
     axios.get(`http://www.dnd5eapi.co/api/monsters/${id}`).then((response) => {
@@ -21,7 +19,6 @@ export function Monster() {
   }
   return (
     <>
-      <NavBar />
       <h1>{monster.name}</h1>
       <h4>
         {monster.size} {monster.type}, {monster.alignment}
@@ -40,23 +37,23 @@ export function Monster() {
               {monster.speed.swim ? (
                 <li>Swimming: {monster.speed.swim}</li>
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
               {monster.speed.burrow ? (
                 <li>Burrowing: {monster.speed.burrow}</li>
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
               {monster.speed.climb ? (
                 <li>Climbing: {monster.speed.climb}</li>
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
             </ul>
           </>
         ) : (
-          <li>Loading...</li>
-        )}
+            <li>Loading...</li>
+          )}
         <li>Stats:</li>
         <table>
           <thead>
@@ -107,8 +104,8 @@ export function Monster() {
             })}
           </>
         ) : (
-          <></>
-        )}
+            <></>
+          )}
         {/* Conditional to ensure senses are loaded and can be displayed if available */}
         {monster.senses ? (
           <>
@@ -117,45 +114,45 @@ export function Monster() {
               {monster.senses.darkvision ? (
                 <li>Darkvision: {monster.senses.darkvision}</li>
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
               {monster.senses.truesight ? (
                 <li>Truesight: {monster.senses.truesight}</li>
               ) : (
-                <></>
-              )}
+                  <></>
+                )}
               <li>
                 Passive Perception: {monster.senses.passive_perception} ft.
               </li>
             </ul>
           </>
         ) : (
-          <li>Loading...</li>
-        )}
+            <li>Loading...</li>
+          )}
         {/* Conditional to ensure languages are loaded and can be displayed if available */}
         {monster.languages ? (
           <li>Languages: {monster.languages}</li>
         ) : (
-          <li>Languages: None</li>
-        )}
+            <li>Languages: None</li>
+          )}
         <li>
           CR: {monster.challenge_rating} ({monster.xp} XP)
         </li>
         {monster.damage_resistances &&
-        monster.damage_resistances.length !== 0 ? (
-          <>
-            <li>Damage Resistances:</li>
-            {monster.damage_resistances.map((resistance, key) => {
-              return (
-                <ul key={key}>
-                  <li>{resistance}</li>
-                </ul>
-              )
-            })}
-          </>
-        ) : (
-          <></>
-        )}
+          monster.damage_resistances.length !== 0 ? (
+            <>
+              <li>Damage Resistances:</li>
+              {monster.damage_resistances.map((resistance, key) => {
+                return (
+                  <ul key={key}>
+                    <li>{resistance}</li>
+                  </ul>
+                )
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         {monster.damage_immunities && monster.damage_immunities.length !== 0 ? (
           <>
             <li>Damage Immunities:</li>
@@ -168,38 +165,38 @@ export function Monster() {
             })}
           </>
         ) : (
-          <></>
-        )}
+            <></>
+          )}
         {monster.condition_immunities &&
-        monster.condition_immunities.length !== 0 ? (
-          <>
-            <li>Condition Immunities:</li>
-            {monster.condition_immunities.map((immunity, key) => {
-              return (
-                <ul key={key}>
-                  <li>{immunity.name}</li>
-                </ul>
-              )
-            })}
-          </>
-        ) : (
-          <></>
-        )}
+          monster.condition_immunities.length !== 0 ? (
+            <>
+              <li>Condition Immunities:</li>
+              {monster.condition_immunities.map((immunity, key) => {
+                return (
+                  <ul key={key}>
+                    <li>{immunity.name}</li>
+                  </ul>
+                )
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         {monster.damage_vulnerabilities &&
-        monster.damage_vulnerabilities.length !== 0 ? (
-          <>
-            <li>Damage Vulnerabilities:</li>
-            {monster.damage_vulnerabilities.map((resistance, key) => {
-              return (
-                <ul key={key}>
-                  <li>{resistance}</li>
-                </ul>
-              )
-            })}
-          </>
-        ) : (
-          <></>
-        )}
+          monster.damage_vulnerabilities.length !== 0 ? (
+            <>
+              <li>Damage Vulnerabilities:</li>
+              {monster.damage_vulnerabilities.map((resistance, key) => {
+                return (
+                  <ul key={key}>
+                    <li>{resistance}</li>
+                  </ul>
+                )
+              })}
+            </>
+          ) : (
+            <></>
+          )}
         {monster.special_abilities ? (
           <>
             <li>Special Abilities:</li>
@@ -215,8 +212,8 @@ export function Monster() {
             })}
           </>
         ) : (
-          <></>
-        )}
+            <></>
+          )}
         {monster.actions ? (
           <>
             <li>Actions:</li>
@@ -232,8 +229,8 @@ export function Monster() {
             })}
           </>
         ) : (
-          <li>Loading...</li>
-        )}
+            <li>Loading...</li>
+          )}
         {monster.legendary_actions ? (
           <>
             <li>Legendary Actions:</li>
@@ -249,10 +246,9 @@ export function Monster() {
             })}
           </>
         ) : (
-          <></>
-        )}
+            <></>
+          )}
       </ul>
-      <Footer />
     </>
   )
 }

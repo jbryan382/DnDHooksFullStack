@@ -1,11 +1,8 @@
 import React from 'react'
-import { Footer } from '../components/Footer'
-import { NavBar } from '../components/NavBar'
 
 export function HomePage() {
   return (
     <>
-      <NavBar />
       <h2>Welcome!</h2>
       <div className="welcomeMessage">
         <p>
@@ -21,7 +18,6 @@ export function HomePage() {
           With hopefully a discord companion around the corner!
         </p>
       </div>
-      <Footer />
     </>
   )
 }
